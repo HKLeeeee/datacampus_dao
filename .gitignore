@@ -213,4 +213,9 @@ fabric.properties
 # Ignore code-workspaces
 *.code-workspace
 
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
 
