@@ -219,3 +219,8 @@ fabric.properties
 .AppleDouble
 .LSOverride
 
+# Data Files
+.data
+.data/*
+.preprocessing/files
+.preprocessing/files/*
