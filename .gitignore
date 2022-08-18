@@ -220,7 +220,5 @@ fabric.properties
 .LSOverride
 
 # Data Files
-.data
-.data/*
-.preprocessing/files
-.preprocessing/files/*
+data
+preprocessing/files
