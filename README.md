@@ -4,6 +4,11 @@
 
 코드다람쥐~~
 
+## 0. 실행 환경
+- OS : Windows 11
+- Python version : 3.8
+- Anaconda version :
+
 ## 1-1. 코드 설명 (preprocessing)
 - ### 0.SQL 연결ipynb
   - AWS RDS를 연결하는 코드
@@ -94,14 +99,9 @@
   - XGBoost 수행 후 결과를 확인하는 코드
 - ### [pycaret]analytics_model_on_colab.ipynb
   - AutoML인 pycaret을 이용해 육교형, 터널형 생태통로 별 최적의 모델을 선정하고 분석모델을 만들어 예측하는 코드
-  - Google colab에서 실행할 것.
+  - Google colab에서 실행할 것.  
 
-## 2. 실행 환경
-- OS : Windows 11
-- Python version : 3.8
-- Anaconda version :  
-
-# 3. 실행 순서
+# 2. 실행 순서
 1. 
 2.
 3.
