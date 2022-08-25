@@ -7,7 +7,7 @@
 ## 0. 실행 환경
 - OS : Windows 11
 - Python version : 3.8
-- Anaconda version :
+- Anaconda version : 4.11.0
 
 ## 1-1. 코드 설명 (preprocessing)
 - ### 0.SQL 연결ipynb
