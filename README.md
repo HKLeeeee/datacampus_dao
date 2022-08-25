@@ -5,9 +5,9 @@
 코드다람쥐~~
 
 ## 1-1. 코드 설명 (preprocessing)
-- - ### 0.SQL 연결ipynb
+- ### 0.SQL 연결ipynb
   - AWS RDS를 연결하는 코드
-- - ### 0.ecobank_api_final.ipynb
+- ### 0.ecobank_api_final.ipynb
   - 국립생태원 Ecobank api로 백두대간 데이터셋을 불러오는 코드
   - 에코뱅크_url모음_수정.csv 파일이 필요합니다.
 - ### 1. 생태통로 규격(PDF) 수정 및 MainData에 추가.ipynb
@@ -97,9 +97,9 @@
   - Google colab에서 실행할 것.
 
 ## 2. 실행 환경
-- ### OS : Windows 11
-- ### Python version : 3.8
-- ### Anaconda version :  
+- OS : Windows 11
+- Python version : 3.8
+- Anaconda version :  
 
 # 3. 실행 순서
 1. 
