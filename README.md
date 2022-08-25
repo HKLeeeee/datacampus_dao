@@ -1,10 +1,10 @@
 # 데이터 청년 캠퍼스 - 동국대학교
-# 팀명 : 다람쥐 오래걷기
-# 주제명 : 생태통로 효율성 평가 및 요인 분석 모델 개발
+### 팀명 : 다람쥐 오래걷기
+### 주제명 : 생태통로 효율성 평가 및 요인 분석 모델 개발
 
 코드다람쥐~~
 
-# 1. 코드 설명
+## 1-1. 코드 설명 (preprocessing)
 ### 0.SQL 연결ipynb
 - AWS RDS를 연결하는 코드
 ### 0.ecobank_api_final.ipynb
@@ -83,6 +83,7 @@
 ### 3. MainData_이항종속변수.ipynb
 - 1
 
+## 1-2. 코드 설명 (analysis)
 ### Clustering.ipynb
 - Clustering 수행 후 응집도와 실루엣 계수를 확인하는 코드
 ### LogisticRegressionRFECV.ipynb
@@ -95,7 +96,7 @@
 - AutoML인 pycaret을 이용해 육교형, 터널형 생태통로 별 최적의 모델을 선정하고 분석모델을 만들어 예측하는 코드
 - Google colab에서 실행할 것.
 
-# 2. 실행 환경
+## 2. 실행 환경
 ### OS : Windows 11
 ### Python version : 3.8
 ### Anaconda version :  
