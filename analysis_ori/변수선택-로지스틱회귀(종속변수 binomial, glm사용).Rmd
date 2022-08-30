@@ -1,0 +1,276 @@
+---
+title: "변수선택-로지스틱회귀(종속변수 binomial, glm사용)"
+author: "Doeun Lee"
+date: "2022-08-19"
+output: html_document
+---
+
+```{r}
+library(dplyr)
+```
+
+# 데이터 불러오기
+```{r}
+overpass_b <- read.csv("C:/Users/Doeun_Lee/Dropbox/DataChungNeonCampus_Project_Dao/data/MainData 전처리 결과 데이터/MainData_차선수/overpass_knn3_drop_preproc.csv")
+tunnel_b <- read.csv("C:/Users/Doeun_Lee/Dropbox/DataChungNeonCampus_Project_Dao/data/MainData 전처리 결과 데이터/MainData_차선수/tunnel_knn3_drop_preproc.csv")
+```
+
+# OVERPASS
+
+## 종속변수 binomial로 변경
+```{r}
+attach(overpass_b)
+overpass_b$생태통로_효율성[생태통로_효율성 == 2] = 1
+```
+## 필요없는 변수 제거
+```{r}
+overpass_b <- overpass_b %>% select(-X, -주변.로드킬.빈도) # 주변로드킬 빈도는 넣으면 NA값으로 나와서 그냥 제외해버림
+```
+
+## test , train 나누기
+```{r}
+set.seed(123)
+train_index <- sample(1:nrow(overpass_b), size = 0.8*nrow(overpass_b), replace = F)
+test_index <- (-train)
+overpass_b_trainset <- overpass_b[train_index,]
+overpass_b_testset <- overpass_b[test_index,]
+```
+
+## 로지스틱 회귀 모델 (fulled model) 
+```{r}
+overpass_b_fulled_model <- glm(생태통로_효율성~., data = overpass_b_trainset, family = binomial())
+
+summary(overpass_b_fulled_model)
+```
+
+## 후진제거법
+
+### step 15단계
+```{r}
+# step 15단계
+step(overpass_b_fulled_model,direction = "backward", scope = list(lower ~1, uppder ~.),steps = 15)
+```
+
+#### step 15단계까지 했을 때 reduced model
+```{r}
+overpass_step15 <- glm(formula = 생태통로_효율성 ~ 주변.동물종.개수 + 
+    주변동물.출현빈도 + 건물까지거리.km. + 최우점식물군락, 
+    family = binomial(), data = overpass_b_trainset)
+
+
+summary(overpass_step15)
+```
+#### test셋으로 predict
+```{r}
+overpass_predict <- predict(overpass_step15, overpass_b_testset, type="response")
+overpass_predict
+```
+
+```{r}
+glm.pred = rep(0, nrow(overpass_b_testset))
+glm.pred[overpass_predict>.5] =1
+
+table(overpass_b_testset$생태통로_효율성,glm.pred )
+
+mean(overpass_b_testset$생태통로_효율성 == glm.pred)
+```
+
+
+
+### step 10단계
+```{r}
+# step 10단계
+step(overpass_b_fulled_model,direction = "backward", scope = list(lower ~1, uppder ~.),steps = 10)
+```
+#### 10단계까지 했을 때 모델
+```{r}
+overpass_step10 <-glm(formula = 생태통로_효율성 ~ 폭.m. + 산책로까지의.최단.거리.km. + 
+    주변.동물종.개수 + 주변동물.출현빈도 + 지형기호.2.3km. + 
+    교통량 + 환경영향평가점수 + 건물까지거리.km. + 
+    최우점식물군락, family = binomial(), data = overpass_b_trainset)
+```
+
+#### test셋으로 predict
+```{r}
+overpass_predict2 <- predict(overpass_step10, overpass_b_testset, type="response")
+overpass_predict2
+```
+
+```{r}
+glm.pred2 = rep(0, nrow(overpass_b_testset))
+glm.pred2[overpass_predict2>.5] =1
+
+table(overpass_b_testset$생태통로_효율성,glm.pred2)
+
+mean(overpass_b_testset$생태통로_효율성 == glm.pred2)
+```
+
+
+### step 16단계
+```{r}
+# step 16단계
+step(overpass_b_fulled_model,direction = "backward", scope = list(lower ~1, uppder ~.),steps = 16)
+```
+#### 16단계까지 했을 때 모델
+```{r}
+overpass_step16 <-glm(formula = 생태통로_효율성 ~ 주변.동물종.개수 + 
+    주변동물.출현빈도 + 건물까지거리.km., family = binomial(), 
+    data = overpass_b_trainset)
+```
+
+#### test셋으로 predict
+```{r}
+overpass_predict3 <- predict(overpass_step16, overpass_b_testset, type="response")
+overpass_predict3
+```
+
+```{r}
+glm.pred3 = rep(0, nrow(overpass_b_testset))
+glm.pred3[overpass_predict3 > .5] = 1
+
+table(overpass_b_testset$생태통로_효율성,glm.pred3)
+
+mean(overpass_b_testset$생태통로_효율성 == glm.pred3)
+```
+
+step이 10~15일때 0.7297로 동일한것으로 보임 (변수 갯수 4~8)
+step이 9일때0.67, 16일때 0.67로 떨어짐
+
+step이 10일때 변수 갯수 : 9
+step이 16일때 변수 갯수 : 3
+
+
+
+## ROC curve
+# TUNNEL
+
+## 필요없는 변수제거
+```{r}
+tunnel_b <- tunnel_b %>% select(-X, -주변.로드킬.빈도)
+```
+
+## test , train 나누기
+```{r}
+set.seed(123)
+train_index <- sample(1:nrow(tunnel_b), size = 0.8*nrow(tunnel_b), replace = F)
+test_index <- (-train)
+tunnel_b_trainset <- overpass_b[train_index,]
+tunnel_b_testset <- overpass_b[test_index,]
+```
+
+## 로지스틱 회귀 모델 (fulled model) 
+```{r}
+tunnel_b_fulled_model <- glm(생태통로_효율성~., data = tunnel_b_trainset, family = binomial())
+
+summary(tunnel_b_fulled_model)
+```
+
+## 변수선택
+
+### 후진제거법
+#### 단계 설정없이 변수제거 
+```{r}
+step(tunnel_b_fulled_model, scope = list(lower~1, upper~.), direction = "backward")
+```
+#### 15단계 까지 했을때 모델
+```{r}
+tunnel_reduced <- glm(formula = 생태통로_효율성 ~ 연장.m. + 경사도 + 
+    농가까지의.거리.km. + 주변동물.출현빈도 + 
+    하천거리.km. + 건물까지거리.km. + 차선_수, family = binomial(), 
+    data = tunnel_b_trainset)
+summary(tunnel_reduced)
+```
+#### test셋으로 predict
+```{r}
+tunnel_predict = predict(tunnel_reduced, tunnel_b_testset, type = "response")
+tunnel_predict
+```
+#### 정확도 계산
+```{r}
+tunnel.pred = rep(0, nrow(tunnel_b_testset))
+tunnel.pred[tunnel_predict > 0.5] = 1
+
+table(tunnel_b_testset$생태통로_효율성 , tunnel.pred)
+mean(tunnel_b_testset$생태통로_효율성==tunnel.pred)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------
+
+
+
+
+# 최우점식물군락 제외하고 OVERPASS
+
+
+## 종속변수 binomial로 변경
+```{r}
+attach(overpass_b)
+overpass_b$생태통로_효율성[생태통로_효율성 == 2] = 1
+```
+## 필요없는 변수 제거
+```{r}
+overpass_b <- overpass_b %>% select(-X, -주변.로드킬.빈도, -최우점식물군락) # 주변로드킬 빈도는 넣으면 NA값으로 나와서 그냥 제외해버림
+```
+
+## test , train 나누기
+```{r}
+set.seed(123)
+train_index <- sample(1:nrow(overpass_b), size = 0.8*nrow(overpass_b), replace = F)
+test_index <- (-train)
+overpass_b_trainset <- overpass_b[train_index,]
+overpass_b_testset <- overpass_b[test_index,]
+```
+
+## 로지스틱 회귀 모델 (fulled model) 
+```{r}
+overpass_b_trainset
+overpass_b_fulled_model <- glm(생태통로_효율성~., data = overpass_b_trainset, family = binomial())
+
+summary(overpass_b_fulled_model)
+```
+
+## 후진제거법
+
+### step 15단계
+```{r}
+# step 15단계
+step(overpass_b_fulled_model,direction = "backward", scope = list(lower ~1, uppder ~.),steps = 9)
+```
+
+#### step 15단계까지 했을 때 reduced model
+```{r}
+overpass_step15 <- glm(formula = 생태통로_효율성 ~ 산책로까지의.최단.거리.km. + 
+    도로.최고제한속도.km.h. + 주변.동물종.개수 + 
+    주변동물.출현빈도 + 지형기호.2.3km. + 등산로까지.최단거리.km. + 
+    교통량 + 환경영향평가점수 + 건물까지거리.km., 
+    family = binomial(), data = overpass_b_trainset)
+
+
+
+summary(overpass_step15)
+```
+#### test셋으로 predict
+```{r}
+overpass_predict <- predict(overpass_step15, overpass_b_testset, type="response")
+overpass_predict
+```
+
+```{r}
+glm.pred = rep(0, nrow(overpass_b_testset))
+glm.pred[overpass_predict>.5] =1
+
+table(overpass_b_testset$생태통로_효율성,glm.pred )
+
+mean(overpass_b_testset$생태통로_효율성 == glm.pred)
+```
