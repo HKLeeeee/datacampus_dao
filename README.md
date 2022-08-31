@@ -84,6 +84,6 @@
   - Package 설치 후, 설치 버전 적용을 위해 런타임 다시 시작 및 코드 재실행 필요
 
 ## 2. 실행 순서
-1. [requirements.yaml](https://github.com/TeamHKL/datacampus_dao/data/requirements.txt)을 이용해 필요한 패키지 설치
+1. [requirements.yaml](https://github.com/TeamHKL/datacampus_dao/data/requirements.yaml)을 이용해 필요한 패키지 설치
 2. preprocessing의 코드들을 파일명 앞 숫자의 순서대로 실행
 3. analysis의 코드 실행
