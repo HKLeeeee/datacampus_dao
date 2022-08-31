@@ -13,8 +13,9 @@
 - Anaconda version : 4.11.0
 - Dependencies
   ```shell
-  conda env create -f requirements.yaml
-  conda activate datacampus_dao
+  $ conda env create -f requirements.yaml
+  
+  $ conda activate datacampus_dao
   ```
 
 ## 1-1. [Preprocessing](https://github.com/TeamHKL/datacampus_dao/tree/main/preprocessing) 코드 설명
