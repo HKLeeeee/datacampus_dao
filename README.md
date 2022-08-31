@@ -11,7 +11,11 @@
 - OS : Windows 11 or macOS 12.3.1
 - Python version : 3.8
 - Anaconda version : 4.11.0
-- Dependencies : [requirements.yaml](https://github.com/TeamHKL/datacampus_dao/data/requirements.txt) 참조
+- Dependencies
+  ```shell
+  conda env create -f requirements.yaml
+  conda activate datacampus_dao
+  ```
 
 ## 1-1. [Preprocessing](https://github.com/TeamHKL/datacampus_dao/tree/main/preprocessing) 코드 설명
 - ### DB.py
