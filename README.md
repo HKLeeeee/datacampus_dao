@@ -1,13 +1,17 @@
+
+
 # 데이터 청년 캠퍼스 - 동국대학교
+<img width="1456" alt="page01" src="https://user-images.githubusercontent.com/69189272/187603814-30042793-13a7-43cf-806f-783ee24ba147.png">
+
 - ### 팀명 : 다람쥐 오래걷기
 - ### 주제명 : 생태통로 효율성 추정 및 주요 요인 분석
   - 야생동물 서식지와 활동영역의 단절화로 인해 로드킬이 빈번히 발생하고 있다. 이를 방지하기 위해서는 효율적인 생태통로 운영이 필요한 실정이다. 따라서 본 프로젝트에서는, 효율성이 일정 수준 이상인 생태통로를 바탕으로 효율성이 낮은 생태통로의 개선을 목표로 데이터 분석을 진행한다.
 
-## 0. 실행 환경
-- OS : Windows 11
+## 0. 실행 환경 및 의존성
+- OS : Windows 11 or macOS 12.3.1
 - Python version : 3.8
 - Anaconda version : 4.11.0
-- 필요 패키지 : requirement.yaml 참조
+- Dependencies : [requirements.yaml](https://github.com/TeamHKL/datacampus_dao/data/requirements.txt) 참조
 
 ## 1-1. Preprocessing 코드 설명
 - ### DB.py
@@ -16,7 +20,7 @@
   - 브이월드 api로 산책로 데이터를 불러와 '산책로_2013.csv' 파일로 저장하는 코드
 - ### 0. 생태통로 네트워크 크롤링.ipynb
   - 국립생태원 생태통로 네트워크에서 전국의 생태통로 이름, 위경도, 모니터링 등의 정보를 크롤링하는 코드
-  - 실행 환경에 맞는 chromedriver가 필요합니다.
+  - Selenium이 실행되지 않는 경우 chrome 브라우저 버전과 [chromedriver.exe](https://chromedriver.chromium.org/downloads) 간 버전이 일치하는지 확인
 - ### 1. 생태통로 전처리.ipynb
   - 생태통로 데이터의 결측치 처리, 라벨링 및 규격 데이터를 추가하는 코드
   - maindata_수정.csv, 생태통로_국립생태원PDF.csv, 생태통로_환경부PDF.csv, 생태통로_규격계산.csv 파일이 필요합니다.
