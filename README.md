@@ -13,7 +13,7 @@
 - Anaconda version : 4.11.0
 - Dependencies : [requirements.yaml](https://github.com/TeamHKL/datacampus_dao/data/requirements.txt) 참조
 
-## 1-1. Preprocessing 코드 설명
+## 1-1. [Preprocessing](https://github.com/TeamHKL/datacampus_dao/tree/main/preprocessing) 코드 설명
 - ### DB.py
   - AWS RDS를 연결하여 데이터를 불러오거나 내보내는 코드
 - ### 0. vworld 산책로 Open API.ipynb
@@ -71,7 +71,7 @@
   - Google Colab 환경에서 실행해야 합니다.
   - Package install & Import 실행 후, 설치 버전 적용을 위해 런타임 다시 시작 및 코드 재실행 필요
 
-## 1-2. Analysis 코드 설명
+## 1-2. [Analysis](https://github.com/TeamHKL/datacampus_dao/tree/main/analysis) 코드 설명
 - ### Analytics_on_colab.ipynb
   - AutoML인 pycaret을 이용해 육교형, 터널형 생태통로별 최적의 모델을 선정하고 분류 분석을 수행하는 코드
   - 변수 중요도 확인 후, Top 10개의 주요 요인을 임의로 개선해 개선율을 예측함으로써 해당 모델의 유효성을 확인
