@@ -1,7 +1,7 @@
 
 
 # 데이터 청년 캠퍼스 - 동국대학교
-<a rel="https://vigorous-pawpaw-311.notion.site/749eb59728134076b959dcbb1a41c60a">
+<a href="https://vigorous-pawpaw-311.notion.site/749eb59728134076b959dcbb1a41c60a" target="_blank">
 <img width="1456" alt="page01" src="https://user-images.githubusercontent.com/69189272/187603814-30042793-13a7-43cf-806f-783ee24ba147.png">
 </a>
 
