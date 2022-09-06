@@ -1,7 +1,9 @@
 
 
 # 데이터 청년 캠퍼스 - 동국대학교
+<a rel="https://vigorous-pawpaw-311.notion.site/749eb59728134076b959dcbb1a41c60a">
 <img width="1456" alt="page01" src="https://user-images.githubusercontent.com/69189272/187603814-30042793-13a7-43cf-806f-783ee24ba147.png">
+</a>
 
 - ### 팀명 : 다람쥐 오래걷기
 - ### 주제명 : 생태통로 효율성 추정 및 주요 요인 분석
